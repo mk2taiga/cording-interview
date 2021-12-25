@@ -42,4 +42,10 @@ func TestAnswer(t *testing.T) {
 		str2 = "bacggfe"
 		assert.False(t, isSortedStrByASCII(str1, str2))
 	})
+
+	t.Run("question 3", func(t *testing.T) {
+		str := "My John Smith "
+
+		assert.Equal(t, "My%20John%20Smith%20", spaceToCode(str))
+	})
 }

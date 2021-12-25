@@ -74,3 +74,18 @@ func isSortedStrByASCII(str1, str2 string) bool {
 
 	return true
 }
+
+// 1.3
+
+func spaceToCode(str string) string {
+	var newStr string
+	for _, s := range str {
+		if string(s) == " " {
+			newStr += "%20"
+		} else {
+			newStr += string(s)
+		}
+	}
+
+	return newStr
+}
