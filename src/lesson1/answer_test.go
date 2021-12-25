@@ -22,4 +22,24 @@ func TestAnswer(t *testing.T) {
 		testStr = "abcdefghij"
 		assert.True(t, isNotDuplicateByByte(testStr))
 	})
+
+	t.Run("question 2", func(t *testing.T) {
+		str1 := "bacdefg"
+		str2 := "bacdgfe"
+		assert.True(t, isSortedStr(str1, str2))
+
+		str1 = "bacdefg"
+		str2 = "bacggfe"
+		assert.False(t, isSortedStr(str1, str2))
+	})
+
+	t.Run("question 2(other answer)", func(t *testing.T) {
+		str1 := "bacdefg"
+		str2 := "bacdgfe"
+		assert.True(t, isSortedStrByASCII(str1, str2))
+
+		str1 = "bacdefg"
+		str2 = "bacggfe"
+		assert.False(t, isSortedStrByASCII(str1, str2))
+	})
 }
