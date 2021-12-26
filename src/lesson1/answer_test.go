@@ -48,4 +48,12 @@ func TestAnswer(t *testing.T) {
 
 		assert.Equal(t, "My%20John%20Smith%20", spaceToCode(str))
 	})
+
+	t.Run("question 4", func(t *testing.T) {
+		str := "Tact Coa"
+		assert.True(t, isReplyString(str))
+
+		str = "Tact Coaa"
+		assert.False(t, isReplyString(str))
+	})
 }

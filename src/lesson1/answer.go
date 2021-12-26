@@ -1,6 +1,9 @@
 package lesson1
 
-import "sort"
+import (
+	"sort"
+	"strings"
+)
 
 // 1.1
 func isNotDuplicate(value string) bool {
@@ -88,4 +91,31 @@ func spaceToCode(str string) string {
 	}
 
 	return newStr
+}
+
+// 1.4
+func isReplyString(str string) bool {
+	lowerStr := strings.ToLower(str)
+	strMap := map[rune]int{}
+	strLen := 0
+	for _, r := range lowerStr {
+		if string(r) == " " {
+			continue
+		}
+
+		strLen++
+		strMap[r]++
+	}
+
+	foundOdd := false
+	for _, v := range strMap {
+		if v%2 == 1 {
+			if foundOdd {
+				return false
+			}
+			foundOdd = true
+		}
+	}
+
+	return true
 }
