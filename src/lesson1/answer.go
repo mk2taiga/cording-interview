@@ -171,3 +171,36 @@ func strPress(str string) string {
 
 	return result
 }
+
+// 1.7
+func rotationMatrix(matrix [][]int32) bool {
+	// 行列の形式が正しくなかったら false
+	if len(matrix) == 0 || len(matrix) != len(matrix[0]) {
+		return false
+	}
+
+	n := len(matrix)
+	// 行列の層の数は辺の半分までのはず。
+	for layer := 0; layer < n/2; layer++ {
+		// 層の最初の位置
+		first := layer
+		// 層の最後の位置
+		last := n - 1 - layer
+		for i := first; i < last; i++ {
+			// i の初期値は first なので引いてあげないと正式なoffsetがわからない。
+			offset := i - first
+
+			// 左上
+			top := matrix[first][i]
+			// 左上に左下
+			matrix[first][i] = matrix[last-offset][first]
+			// 左下に右下
+			matrix[last-offset][first] = matrix[last][last-offset]
+			// 右下に右上
+			matrix[last][last-offset] = matrix[i][last]
+			// 右上に左上
+			matrix[i][last] = top
+		}
+	}
+	return true
+}

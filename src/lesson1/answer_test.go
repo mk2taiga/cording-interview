@@ -80,8 +80,25 @@ func TestAnswer(t *testing.T) {
 		want := "a2b1c5a3"
 		assert.Equal(t, want, strPress(str))
 
-		//str = "abcdefg"
-		//want = "abcdefg"
-		//assert.Equal(t, want, strPress(str))
+		str = "abcdefg"
+		want = "abcdefg"
+		assert.Equal(t, want, strPress(str))
+	})
+
+	t.Run("question 7", func(t *testing.T) {
+		matrix := [][]int32{
+			{1, 2, 3, 4},
+			{5, 6, 7, 8},
+			{9, 10, 11, 12},
+			{13, 14, 15, 16},
+		}
+		want := [][]int32{
+			{13, 9, 5, 1},
+			{14, 10, 6, 2},
+			{15, 11, 7, 3},
+			{16, 12, 8, 4},
+		}
+		rotationMatrix(matrix)
+		assert.Equal(t, want, matrix)
 	})
 }
