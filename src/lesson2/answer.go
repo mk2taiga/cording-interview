@@ -78,3 +78,14 @@ func tail(n *Node, tailIdx int) *Node {
 
 	return nil
 }
+
+// 2.3
+func removeNode(node *Node) {
+	if node == nil || node.next == nil {
+		return
+	}
+
+	next := node.next
+	node.data = next.data
+	node.next = next.next
+}

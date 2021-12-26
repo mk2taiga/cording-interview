@@ -56,4 +56,31 @@ func TestAnswer(t *testing.T) {
 		want := 4
 		assert.Equal(t, want, tail(node, 2).data)
 	})
+
+	t.Run("question 3", func(t *testing.T) {
+		deleteNode := &Node{
+			next: &Node{
+				next: &Node{data: 5},
+				data: 4,
+			},
+			data: 3,
+		}
+		node := &Node{
+			next: &Node{
+				next: deleteNode,
+				data: 2,
+			},
+			data: 1,
+		}
+
+		removeNode(deleteNode)
+		want := []int{1, 2, 4, 5}
+		n := node
+		i := 0
+		for n != nil {
+			assert.Equal(t, want[i], n.data)
+			n = n.next
+			i++
+		}
+	})
 }
