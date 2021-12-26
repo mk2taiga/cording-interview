@@ -116,3 +116,40 @@ func partition(node *Node, x int) *Node {
 	tail.next = nil
 	return head
 }
+
+// 2.5
+func addList(node1, node2 *Node, carry int) *Node {
+	if node1 == nil && node2 == nil && carry == 0 {
+		return nil
+	}
+
+	result := &Node{}
+
+	value := carry
+	if node1 != nil {
+		value += node1.data
+	}
+	if node2 != nil {
+		value += node2.data
+	}
+
+	result.data = value % 10
+	if node1 != nil || node2 != nil {
+		var n1 *Node
+		var n2 *Node
+		var nc int
+
+		if node1 != nil {
+			n1 = node1.next
+		}
+		if node2 != nil {
+			n2 = node2.next
+		}
+		if value >= 10 {
+			nc = 1
+		}
+		result.next = addList(n1, n2, nc)
+	}
+
+	return result
+}

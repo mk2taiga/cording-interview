@@ -116,4 +116,31 @@ func TestAnswer(t *testing.T) {
 			i++
 		}
 	})
+
+	t.Run("question 5", func(t *testing.T) {
+		node1 := &Node{
+			next: &Node{
+				next: &Node{data: 3},
+				data: 2,
+			},
+			data: 1,
+		}
+
+		node2 := &Node{
+			next: &Node{
+				next: &Node{data: 9},
+				data: 8,
+			},
+			data: 7,
+		}
+
+		got := addList(node1, node2, 0)
+		want := []int{8, 0, 3, 1}
+		i := 0
+		for got != nil {
+			assert.Equal(t, want[i], got.data)
+			got = got.next
+			i++
+		}
+	})
 }
