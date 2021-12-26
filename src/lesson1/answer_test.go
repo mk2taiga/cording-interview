@@ -101,4 +101,21 @@ func TestAnswer(t *testing.T) {
 		rotationMatrix(matrix)
 		assert.Equal(t, want, matrix)
 	})
+
+	t.Run("question 8", func(t *testing.T) {
+		matrix := [][]int32{
+			{1, 2, 3, 4},
+			{5, 0, 7, 8},
+			{9, 10, 11, 12},
+			{13, 14, 0, 16},
+		}
+		want := [][]int32{
+			{1, 0, 0, 4},
+			{0, 0, 0, 0},
+			{9, 0, 0, 12},
+			{0, 0, 0, 0},
+		}
+		toZero(matrix)
+		assert.Equal(t, want, matrix)
+	})
 }

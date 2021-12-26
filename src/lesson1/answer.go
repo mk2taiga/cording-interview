@@ -204,3 +204,27 @@ func rotationMatrix(matrix [][]int32) bool {
 	}
 	return true
 }
+
+// 1.8
+
+func toZero(matrix [][]int32) {
+	rowMap := map[int]bool{}
+	colMap := map[int]bool{}
+
+	for i, row := range matrix {
+		for j, col := range row {
+			if col == 0 {
+				rowMap[i] = true
+				colMap[j] = true
+			}
+		}
+	}
+
+	for i, row := range matrix {
+		for j := range row {
+			if rowMap[i] || colMap[j] {
+				matrix[i][j] = 0
+			}
+		}
+	}
+}
