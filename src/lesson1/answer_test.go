@@ -56,4 +56,22 @@ func TestAnswer(t *testing.T) {
 		str = "Tact Coaa"
 		assert.False(t, isReplyString(str))
 	})
+
+	t.Run("question 5", func(t *testing.T) {
+		str1 := "pile"
+		str2 := "pil"
+		assert.True(t, isOneChange(str1, str2))
+
+		str1 = "pile"
+		str2 = "piles"
+		assert.True(t, isOneChange(str1, str2))
+
+		str1 = "pile"
+		str2 = "bile"
+		assert.True(t, isOneChange(str1, str2))
+
+		str1 = "pale"
+		str2 = "bake"
+		assert.False(t, isOneChange(str1, str2))
+	})
 }

@@ -119,3 +119,29 @@ func isReplyString(str string) bool {
 
 	return true
 }
+
+// 1.5
+
+func isOneChange(str1, str2 string) bool {
+	var bitVector int
+
+	lowerStr1 := strings.ToLower(str1)
+	lowerStr2 := strings.ToLower(str2)
+	minChar := int32("a"[0])
+	maxChar := int32("z"[0])
+	for _, v := range lowerStr1 {
+		if v < minChar && v > maxChar {
+			continue
+		}
+		bitVector |= 1 << (v - minChar)
+	}
+
+	for _, v := range lowerStr2 {
+		if v < minChar && v > maxChar {
+			continue
+		}
+		bitVector &= ^(1 << (v - minChar))
+	}
+
+	return (bitVector & (bitVector - 1)) == 0
+}
