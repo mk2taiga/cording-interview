@@ -2,6 +2,7 @@ package lesson1
 
 import (
 	"sort"
+	"strconv"
 	"strings"
 )
 
@@ -144,4 +145,29 @@ func isOneChange(str1, str2 string) bool {
 	}
 
 	return (bitVector & (bitVector - 1)) == 0
+}
+
+// 1.6
+
+// StringBuilder を使って処理を文字列結合に使う時間を最適化
+func strPress(str string) string {
+	var strCnt int
+	builder := strings.Builder{}
+
+	for i, v := range str {
+		strCnt++
+
+		if i+1 >= len(str) || v != int32(str[i+1]) {
+			builder.WriteString(string(v))
+			builder.WriteString(strconv.Itoa(strCnt))
+			strCnt = 0
+		}
+	}
+
+	result := builder.String()
+	if len(result) >= len(str) {
+		return str
+	}
+
+	return result
 }

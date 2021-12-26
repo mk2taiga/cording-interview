@@ -74,4 +74,14 @@ func TestAnswer(t *testing.T) {
 		str2 = "bake"
 		assert.False(t, isOneChange(str1, str2))
 	})
+
+	t.Run("question 6", func(t *testing.T) {
+		str := "aabcccccaaa"
+		want := "a2b1c5a3"
+		assert.Equal(t, want, strPress(str))
+
+		//str = "abcdefg"
+		//want = "abcdefg"
+		//assert.Equal(t, want, strPress(str))
+	})
 }
