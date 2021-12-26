@@ -89,3 +89,30 @@ func removeNode(node *Node) {
 	node.data = next.data
 	node.next = next.next
 }
+
+// 2.4
+func partition(node *Node, x int) *Node {
+	if node == nil {
+		return nil
+	}
+
+	head := node
+	tail := node
+	for node != nil {
+		next := node.next
+
+		if node.data < x {
+			// 新しいデータをheadにする。
+			node.next = head
+			head = node
+		} else {
+			// 現状の末尾にnodeをつなげる
+			tail.next = node
+			// 新しい末尾
+			tail = node
+		}
+		node = next
+	}
+	tail.next = nil
+	return head
+}

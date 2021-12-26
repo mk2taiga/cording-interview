@@ -83,4 +83,37 @@ func TestAnswer(t *testing.T) {
 			i++
 		}
 	})
+
+	t.Run("question 4", func(t *testing.T) {
+		node := &Node{
+			next: &Node{
+				next: &Node{
+					next: &Node{
+						next: &Node{
+							next: &Node{
+								next: &Node{
+									data: 1,
+								},
+								data: 2,
+							},
+							data: 10,
+						},
+						data: 5,
+					},
+					data: 8,
+				},
+				data: 5,
+			},
+			data: 3,
+		}
+
+		got := partition(node, 5)
+		want := []int{1, 2, 3, 5, 8, 5, 10}
+		i := 0
+		for got != nil {
+			assert.Equal(t, want[i], got.data)
+			got = got.next
+			i++
+		}
+	})
 }
