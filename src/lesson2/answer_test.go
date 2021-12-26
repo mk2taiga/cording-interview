@@ -35,4 +35,25 @@ func TestAnswer(t *testing.T) {
 			i++
 		}
 	})
+
+	t.Run("question 2", func(t *testing.T) {
+		node := &Node{
+			next: &Node{
+				next: &Node{
+					next: &Node{
+						next: &Node{
+							data: 1,
+						},
+						data: 4,
+					},
+					data: 3,
+				},
+				data: 2,
+			},
+			data: 1,
+		}
+
+		want := 4
+		assert.Equal(t, want, tail(node, 2).data)
+	})
 }

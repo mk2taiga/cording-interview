@@ -50,3 +50,31 @@ func removeDuplicate(n *Node) {
 		n = n.next
 	}
 }
+
+// 2.2
+
+func tail(n *Node, tailIdx int) *Node {
+	var cnt int
+	current := n
+	for current != nil {
+		cnt++
+		current = current.next
+	}
+
+	idx := cnt - tailIdx
+	if idx < 0 {
+		return nil
+	}
+
+	current = n
+	nowIdx := 0
+	for current != nil {
+		if idx == nowIdx {
+			return current
+		}
+		nowIdx++
+		current = current.next
+	}
+
+	return nil
+}
