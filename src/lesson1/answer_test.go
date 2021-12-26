@@ -118,4 +118,14 @@ func TestAnswer(t *testing.T) {
 		toZero(matrix)
 		assert.Equal(t, want, matrix)
 	})
+
+	t.Run("question 1.9", func(t *testing.T) {
+		str1 := "waterbottle"
+		str2 := "erbottlewat"
+		assert.True(t, isRotation(str1, str2))
+
+		str1 = "waterbottle"
+		str2 = "erabottlewat"
+		assert.False(t, isRotation(str1, str2))
+	})
 }

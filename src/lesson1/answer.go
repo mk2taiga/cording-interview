@@ -228,3 +228,13 @@ func toZero(matrix [][]int32) {
 		}
 	}
 }
+
+// 1.9
+func isRotation(str1, str2 string) bool {
+	if len(str1) == 0 || len(str1) != len(str2) {
+		return false
+	}
+
+	longStr := str1 + str1
+	return strings.Contains(longStr, str2)
+}
