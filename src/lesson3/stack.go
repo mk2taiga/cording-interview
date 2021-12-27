@@ -5,6 +5,7 @@ import "errors"
 type MyStack struct {
 	top  *Node
 	data interface{}
+	size int
 }
 
 func NewMyStack(data interface{}) MyStack {
@@ -18,6 +19,7 @@ func (s *MyStack) pop() (*Node, error) {
 
 	item := s.top
 	s.top = s.top.next
+	s.size--
 	return item, nil
 }
 
@@ -25,6 +27,7 @@ func (s *MyStack) push(data interface{}) {
 	node := &Node{data: data}
 	node.next = s.top
 	s.top = node
+	s.size++
 }
 
 func (s *MyStack) peek() (interface{}, error) {

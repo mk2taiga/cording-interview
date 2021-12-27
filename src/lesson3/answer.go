@@ -113,3 +113,47 @@ func (s *StackWithMin) min() int {
 //  * この実装では、Nodeは走行の連結リストになっていないといけない。
 
 // 3.4
+
+// MyQueueByStack キューはFIFO
+type MyQueueByStack struct {
+	// 新しい要素が上に来るスタック
+	stackNew MyStack
+	// 古い要素が上に来るスタック
+	stackOld MyStack
+}
+
+func NewMyQueueByStack() MyQueueByStack {
+	return MyQueueByStack{
+		stackNew: NewMyStack(nil),
+		stackOld: NewMyStack(nil),
+	}
+}
+
+func (q *MyQueueByStack) size() int {
+	return q.stackNew.size + q.stackOld.size
+}
+
+func (q *MyQueueByStack) add(data interface{}) {
+	q.stackNew.push(data)
+}
+
+func (q *MyQueueByStack) shiftStacks() {
+	if q.stackOld.isEmpty() {
+		for !q.stackNew.isEmpty() {
+			node, _ := q.stackNew.pop()
+			q.stackOld.push(node.data)
+		}
+	}
+}
+
+func (q *MyQueueByStack) peek(data interface{}) interface{} {
+	q.shiftStacks()
+	d, _ := q.stackOld.peek()
+	return d
+}
+
+func (q *MyQueueByStack) remove() interface{} {
+	q.shiftStacks()
+	d, _ := q.stackOld.pop()
+	return d.data
+}

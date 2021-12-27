@@ -56,4 +56,16 @@ func TestAnswer(t *testing.T) {
 		assert.Equal(t, 3, stack.min())
 		assert.Equal(t, 3, stack.pop())
 	})
+
+	t.Run("question 4", func(t *testing.T) {
+		q := NewMyQueueByStack()
+		q.add(1)
+		q.add(2)
+		q.add(3)
+
+		hoge := q.remove().(int)
+		assert.Equal(t, 1, hoge)
+		assert.Equal(t, 2, q.remove().(int))
+		assert.Equal(t, 3, q.remove().(int))
+	})
 }
