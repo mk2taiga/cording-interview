@@ -23,7 +23,7 @@ func (s *MyStack) pop() (*Node, error) {
 
 func (s *MyStack) push(data interface{}) {
 	node := &Node{data: data}
-	s.top.next = s.top
+	node.next = s.top
 	s.top = node
 }
 
@@ -44,11 +44,8 @@ type StackUseList struct {
 	top   int
 }
 
-func NewStackUseList() StackUseList {
-	return StackUseList{
-		stack: make([]interface{}, 100),
-		top:   0,
-	}
+func NewStackUseList(cap int) StackUseList {
+	return StackUseList{stack: make([]interface{}, cap)}
 }
 
 func (s *StackUseList) push(data interface{}) {
