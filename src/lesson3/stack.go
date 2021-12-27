@@ -38,3 +38,43 @@ func (s *MyStack) peek() (interface{}, error) {
 func (s *MyStack) isEmpty() bool {
 	return s.top == nil
 }
+
+type StackUseList struct {
+	stack []interface{}
+	top   int
+}
+
+func NewStackUseList() StackUseList {
+	return StackUseList{
+		stack: make([]interface{}, 100),
+		top:   0,
+	}
+}
+
+func (s *StackUseList) push(data interface{}) {
+	s.stack[s.top] = data
+	s.top++
+}
+
+func (s *StackUseList) pop() interface{} {
+	if s.isEmpty() {
+		return nil
+	}
+
+	s.top--
+	data := s.stack[s.top]
+	s.stack[s.top] = nil
+	return data
+}
+
+func (s *StackUseList) peek() interface{} {
+	if s.isEmpty() {
+		return nil
+	}
+
+	return s.stack[s.top]
+}
+
+func (s *StackUseList) isEmpty() bool {
+	return s.top == 0
+}
