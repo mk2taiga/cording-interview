@@ -85,7 +85,7 @@ func (s *StackWithMin) push(data int) {
 }
 
 func (s *StackWithMin) pop() int {
-	n, _ := s.stack.pop()
+	n := s.stack.pop()
 	if n.data == s.min() {
 		s.minStack.pop()
 	}
@@ -98,8 +98,7 @@ func (s *StackWithMin) min() int {
 		return math.MaxInt
 	}
 
-	val, _ := s.minStack.peek()
-	return val.(int)
+	return s.minStack.peek().(int)
 }
 
 // 3.3
@@ -140,20 +139,17 @@ func (q *MyQueueByStack) add(data interface{}) {
 func (q *MyQueueByStack) shiftStacks() {
 	if q.stackOld.isEmpty() {
 		for !q.stackNew.isEmpty() {
-			node, _ := q.stackNew.pop()
-			q.stackOld.push(node.data)
+			q.stackOld.push(q.stackNew.pop().data)
 		}
 	}
 }
 
 func (q *MyQueueByStack) peek(data interface{}) interface{} {
 	q.shiftStacks()
-	d, _ := q.stackOld.peek()
-	return d
+	return q.stackOld.peek()
 }
 
 func (q *MyQueueByStack) remove() interface{} {
 	q.shiftStacks()
-	d, _ := q.stackOld.pop()
-	return d.data
+	return q.stackOld.pop().data
 }

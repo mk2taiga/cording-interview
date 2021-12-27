@@ -1,7 +1,5 @@
 package lesson3
 
-import "errors"
-
 type MyStack struct {
 	top  *Node
 	data interface{}
@@ -12,15 +10,15 @@ func NewMyStack(data interface{}) MyStack {
 	return MyStack{data: data}
 }
 
-func (s *MyStack) pop() (*Node, error) {
+func (s *MyStack) pop() *Node {
 	if s.top == nil {
-		return nil, errors.New("top not found")
+		return nil
 	}
 
 	item := s.top
 	s.top = s.top.next
 	s.size--
-	return item, nil
+	return item
 }
 
 func (s *MyStack) push(data interface{}) {
@@ -30,16 +28,31 @@ func (s *MyStack) push(data interface{}) {
 	s.size++
 }
 
-func (s *MyStack) peek() (interface{}, error) {
+func (s *MyStack) peek() interface{} {
 	if s.top == nil {
-		return nil, errors.New("error occurs")
+		return nil
 	}
 
-	return s.top.data, nil
+	return s.top.data
 }
 
 func (s *MyStack) isEmpty() bool {
 	return s.top == nil
+}
+
+func (s *MyStack) sort() {
+	r := NewMyStack(nil)
+	for !s.isEmpty() {
+		tmp := s.pop().data
+		for !r.isEmpty() && tmp.(int) > r.peek().(int) {
+			s.push(r.pop().data)
+		}
+		r.push(tmp)
+	}
+
+	for !r.isEmpty() {
+		s.push(r.pop().data)
+	}
 }
 
 type StackUseList struct {
