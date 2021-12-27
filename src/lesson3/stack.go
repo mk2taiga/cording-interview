@@ -41,11 +41,15 @@ func (s *MyStack) isEmpty() bool {
 
 type StackUseList struct {
 	stack []interface{}
+	cap   int
 	top   int
 }
 
 func NewStackUseList(cap int) StackUseList {
-	return StackUseList{stack: make([]interface{}, cap)}
+	return StackUseList{
+		stack: make([]interface{}, cap),
+		cap:   cap,
+	}
 }
 
 func (s *StackUseList) push(data interface{}) {
@@ -70,6 +74,10 @@ func (s *StackUseList) peek() interface{} {
 	}
 
 	return s.stack[s.top]
+}
+
+func (s *StackUseList) isFill() bool {
+	return s.top == s.cap
 }
 
 func (s *StackUseList) isEmpty() bool {
