@@ -153,3 +153,9 @@ func (q *MyQueueByStack) remove() interface{} {
 	q.shiftStacks()
 	return q.stackOld.pop().data
 }
+
+// 3.6
+// TODO:
+//		1. 犬と猫のみをキューで管理できればいいので、AnimalQueue のなかに二つの二つのリストを持つ。
+//		2. 動物のデータは、タイムスタンプを持つ
+//  	3. pushAny はそれぞれのリストから0番目を取得して、タイムスタンプで比較して古い方だけを取り出す。
