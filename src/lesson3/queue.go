@@ -11,7 +11,7 @@ func NewMyQueue(data interface{}) MyQueue {
 	return MyQueue{data: data}
 }
 
-func (q *MyQueue) add(data interface{}) {
+func (q *MyQueue) Add(data interface{}) {
 	node := &Node{data: data}
 	if q.last != nil {
 		q.last.next = node
@@ -23,7 +23,7 @@ func (q *MyQueue) add(data interface{}) {
 	}
 }
 
-func (q *MyQueue) remove() interface{} {
+func (q *MyQueue) Remove() interface{} {
 	if q.first == nil {
 		return nil
 	}
@@ -36,7 +36,7 @@ func (q *MyQueue) remove() interface{} {
 	return data
 }
 
-func (q *MyQueue) peek() interface{} {
+func (q *MyQueue) Peek() interface{} {
 	if q.first == nil {
 		return nil
 	}
@@ -44,7 +44,7 @@ func (q *MyQueue) peek() interface{} {
 	return q.first.data
 }
 
-func (q *MyQueue) isEmpty() bool {
+func (q *MyQueue) IsEmpty() bool {
 	return q.first == nil
 }
 

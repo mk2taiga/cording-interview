@@ -1,6 +1,9 @@
 package lesson4
 
-import "math"
+import (
+	"cording-interview/src/lesson3"
+	"math"
+)
 
 type Node struct {
 	parent, left, right *Node
@@ -198,5 +201,72 @@ func (h Heap) maxHeapify(idx int) {
 	if largest != idx {
 		h[idx], h[largest] = h[largest], h[idx]
 		h.maxHeapify(largest)
+	}
+}
+
+// TODO: 優先度付きキューの実装(insert)
+//	キューの最後に値を追加する
+//	キューのparent(i/2)と比較して、新しい値の方が大きければ入れ替える。
+//	parentのindexが1より大きい間繰り返す。
+
+// TODO: 優先度付きキューの実装(最大値削除)
+// 	0インデックスを取得して、一番小さい値を0idxに格納する。
+//  0番目からひたすらmaxHeapify(0)を実行する。
+
+// Graph is a graph with n vertices and edges.
+type Graph struct {
+	n     int
+	edges [][]int
+	color []int
+}
+
+func (g Graph) dfs() {
+	for i := 0; i < g.n; i++ {
+		g.color[i] = 0
+	}
+
+	for i := 0; i < g.n; i++ {
+		if g.color[i] == 0 {
+			g.dfsVisit(i)
+		}
+	}
+}
+
+func (g Graph) dfsVisit(pos int) {
+	g.color[pos] = 1
+	for visit := 0; visit < g.n; visit++ {
+		if g.edges[pos][visit] == 0 {
+			continue
+		}
+		if g.color[visit] == 0 {
+			g.dfsVisit(visit)
+		}
+	}
+
+	g.color[pos] = 2
+}
+
+func (g Graph) bfs(start int) {
+	q := lesson3.NewMyQueue(nil)
+	q.Add(start)
+	for i := 0; i < g.n; i++ {
+		g.color[i] = 0
+	}
+	g.color[start] = 1
+
+	var u int
+	for !q.IsEmpty() {
+		u = q.Remove().(int)
+		for v := 0; v < g.n; v++ {
+			if g.edges[u][v] == 0 {
+				continue
+			}
+			if g.color[v] != 0 {
+				continue
+			}
+			g.color[v] = 1
+			q.Add(v)
+		}
+		g.color[u] = 2
 	}
 }
