@@ -180,3 +180,23 @@ func (t BinTree) delete(u *Node) {
 		u.val = target.val
 	}
 }
+
+type Heap []int
+
+func (h Heap) maxHeapify(idx int) {
+	l := 2 * idx
+	r := 2*idx + 1
+
+	largest := idx
+	if l <= len(h) && h[l] > h[idx] {
+		largest = l
+	}
+	if r <= len(h) && h[r] > h[idx] {
+		largest = r
+	}
+
+	if largest != idx {
+		h[idx], h[largest] = h[largest], h[idx]
+		h.maxHeapify(largest)
+	}
+}
