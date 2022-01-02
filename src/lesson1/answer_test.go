@@ -15,7 +15,7 @@ func TestAnswer(t *testing.T) {
 		assert.True(t, isNotDuplicate(testStr))
 	})
 
-	t.Run("question 1(other answer)", func(t *testing.T) {
+	t.Run("question 1(hackerrank answer)", func(t *testing.T) {
 		testStr := "abcdaebfg"
 		assert.False(t, isNotDuplicateByByte(testStr))
 
@@ -33,7 +33,7 @@ func TestAnswer(t *testing.T) {
 		assert.False(t, isSortedStr(str1, str2))
 	})
 
-	t.Run("question 2(other answer)", func(t *testing.T) {
+	t.Run("question 2(hackerrank answer)", func(t *testing.T) {
 		str1 := "bacdefg"
 		str2 := "bacdgfe"
 		assert.True(t, isSortedStrByASCII(str1, str2))
