@@ -184,30 +184,52 @@ func (t BinTree) delete(u *Node) {
 	}
 }
 
-type Heap []int
+type Heap struct {
+	list []int
+	size int
+}
 
-func (h Heap) maxHeapify(idx int) {
+func (h *Heap) buildMaxHeap() {
+	for i := h.size / 2; i >= 1; i-- {
+		h.maxHeapify(i)
+	}
+}
+
+func (h *Heap) maxHeapify(idx int) {
 	l := 2 * idx
 	r := 2*idx + 1
 
 	largest := idx
-	if l <= len(h) && h[l] > h[idx] {
+	if l <= h.size && h.list[l] > h.list[largest] {
 		largest = l
 	}
-	if r <= len(h) && h[r] > h[idx] {
+	if r <= h.size && h.list[r] > h.list[largest] {
 		largest = r
 	}
 
 	if largest != idx {
-		h[idx], h[largest] = h[largest], h[idx]
+		h.list[idx], h.list[largest] = h.list[largest], h.list[idx]
 		h.maxHeapify(largest)
 	}
 }
 
-// TODO: 優先度付きキューの実装(insert)
-//	キューの最後に値を追加する
-//	キューのparent(i/2)と比較して、新しい値の方が大きければ入れ替える。
-//	parentのindexが1より大きい間繰り返す。
+func (h *Heap) increaseKey(i, key int) {
+	if key < h.list[i] {
+		return
+	}
+
+	h.list[i] = key
+	for i > 1 && h.list[i/2] < h.list[i] {
+		h.list[i], h.list[i/2] = h.list[i/2], h.list[i]
+		i = i / 2
+	}
+}
+
+func (h *Heap) insert(key int) {
+	h.size++
+	h.list = append(h.list, -math.MaxInt)
+	h.increaseKey(h.size, key)
+}
 
 // TODO: 優先度付きキューの実装(最大値削除)
 // 	0インデックスを取得して、一番小さい値を0idxに格納する。

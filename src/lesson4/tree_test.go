@@ -27,4 +27,17 @@ func TestTree(t *testing.T) {
 		tree.inParse(tree.root)
 		tree.postParse(tree.root)
 	})
+
+	t.Run("test heap", func(t *testing.T) {
+		heap := Heap{
+			list: []int{0, 4, 1, 3, 2, 16, 9, 10, 14, 8, 7},
+			size: 10,
+		}
+
+		heap.buildMaxHeap()
+		assert.Equal(t, []int{0, 16, 14, 10, 8, 7, 9, 3, 2, 4, 1}, heap.list)
+
+		heap.insert(20)
+		assert.Equal(t, []int{0, 20, 16, 10, 8, 14, 9, 3, 2, 4, 1, 7}, heap.list)
+	})
 }
