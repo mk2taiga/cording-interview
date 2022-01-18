@@ -39,5 +39,6 @@ func TestTree(t *testing.T) {
 
 		heap.insert(20)
 		assert.Equal(t, []int{0, 20, 16, 10, 8, 14, 9, 3, 2, 4, 1, 7}, heap.list)
+
 	})
 }

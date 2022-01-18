@@ -231,9 +231,17 @@ func (h *Heap) insert(key int) {
 	h.increaseKey(h.size, key)
 }
 
-// TODO: 優先度付きキューの実装(最大値削除)
-// 	0インデックスを取得して、一番小さい値を0idxに格納する。
-//  0番目からひたすらmaxHeapify(0)を実行する。
+func (h *Heap) remove() int {
+	if len(h.list) < 1 {
+		return -math.MaxInt
+	}
+
+	v := h.list[1]
+	h.size--
+	h.list[1] = h.list[h.size]
+	h.maxHeapify(1)
+	return v
+}
 
 // Graph is a graph with n vertices and edges.
 type Graph struct {
